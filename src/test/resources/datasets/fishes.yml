@@ -1,0 +1,13 @@
+fishes:
+  - id: 1
+    name: "タイ"
+    weight: "2200g"
+    price: "￥1400"
+  - id: 2
+    name: "カニ"
+    weight: "500g"
+    price: "￥10000"
+  - id: 3
+    name: "マグロ"
+    weight: "30000g"
+    price: "￥93510"
