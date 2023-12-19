@@ -1,4 +1,4 @@
-package com.Moriwaki.Java10thtopic.entity;
+package com.moriwaki.java10thtopic.entity;
 
 import java.util.Objects;
 
@@ -59,4 +59,5 @@ public class Fish {
     public int hashCode() {
         return Objects.hash(id, name, weight, price);
     }
+
 }

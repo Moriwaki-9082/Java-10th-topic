@@ -1,9 +1,8 @@
-package com.Moriwaki.Java10thtopic.controller;
+package com.moriwaki.java10thtopic.controller;
 
-import com.Moriwaki.Java10thtopic.entity.Fish;
-import com.Moriwaki.Java10thtopic.exception.FishNotFoundException;
-import com.Moriwaki.Java10thtopic.mapper.FishMapper;
-import com.Moriwaki.Java10thtopic.service.FishService;
+import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.exception.FishNotFoundException;
+import com.moriwaki.java10thtopic.service.FishService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,7 @@ import java.util.Map;
 
 @RestController
 public class FishController {
+
     private final FishService fishService;
     public FishController(FishService fishService) {
         this.fishService = fishService;
@@ -30,8 +30,9 @@ public class FishController {
 
     @GetMapping("/fishes/{id}")
     public Fish getFish(@PathVariable("id") int id) {
-        return fishService.findFish(id);
+        return fishService.findById(id);
     }
+
     @ExceptionHandler(value = FishNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleFishNotFoundException(
             FishNotFoundException e, HttpServletRequest request) {
@@ -43,4 +44,5 @@ public class FishController {
                 "path", request.getRequestURI());
         return new ResponseEntity(body, HttpStatus.NOT_FOUND);
     }
+
 }

@@ -1,4 +1,4 @@
-package com.Moriwaki.Java10thtopic;
+package com.moriwaki.java10thtopic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

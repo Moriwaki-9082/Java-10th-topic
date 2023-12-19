@@ -1,6 +1,6 @@
 package integrationtest;
 
-import com.Moriwaki.Java10thtopic.Java10thTopicApplication;
+import com.moriwaki.java10thtopic.Java10thTopicApplication;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;

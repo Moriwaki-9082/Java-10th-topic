@@ -1,20 +1,18 @@
-package com.Moriwaki.Java10thtopic.mapper;
+package com.moriwaki.java10thtopic.mapper;
 
-import com.Moriwaki.Java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.entity.Fish;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DBRider
 @MybatisTest
@@ -37,4 +35,13 @@ class FishMapperTest {
                         new Fish(3, "マグロ", "30000g","￥93510")
                 );
     }
+
+    @Test
+    @DataSet(value = "datasets/fishes.yml")
+    @Transactional
+    public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
+        Optional<Fish> actual = fishMapper.findById(1);
+        assertThat(actual).contains(new Fish(1, "タイ", "2200g", "￥1400"));
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.Moriwaki.Java10thtopic;
+package com.moriwaki.java10thtopic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

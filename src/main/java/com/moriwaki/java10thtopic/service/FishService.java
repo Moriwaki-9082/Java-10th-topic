@@ -1,8 +1,8 @@
-package com.Moriwaki.Java10thtopic.service;
+package com.moriwaki.java10thtopic.service;
 
-import com.Moriwaki.Java10thtopic.entity.Fish;
-import com.Moriwaki.Java10thtopic.exception.FishNotFoundException;
-import com.Moriwaki.Java10thtopic.mapper.FishMapper;
+import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.exception.FishNotFoundException;
+import com.moriwaki.java10thtopic.mapper.FishMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class FishService {
         return this.fishMapper.findAll();
     }
 
-    public Fish findFish(int id) {
+    public Fish findById(int id) {
         Optional<Fish> fish = this.fishMapper.findById(id);
         if (fish.isPresent()) {
             return fish.get();
