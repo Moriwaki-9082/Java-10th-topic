@@ -3,23 +3,23 @@ package com.moriwaki.java10thtopic.entity;
 import java.util.Objects;
 
 public class Fish {
-    private int id;
+    private Integer id;
     private String name;
     private String weight;
     private String price;
 
-    public Fish(int id, String name, String weight, String price) {
+    public Fish(Integer id, String name, String weight, String price) {
         this.id = id;
         this.name = name;
         this.weight = weight;
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
