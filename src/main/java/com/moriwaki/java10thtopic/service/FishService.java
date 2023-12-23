@@ -28,4 +28,11 @@ public class FishService {
             throw new FishNotFoundException("fish not found");
         }
     }
+
+    public Fish insert(String name, String weight, String price) {
+        Fish fish = new Fish(null, name, weight, price);
+        fishMapper.insert(fish);
+        return fish;
+    }
+
 }

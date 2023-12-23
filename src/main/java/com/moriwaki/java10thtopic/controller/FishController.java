@@ -2,11 +2,14 @@ package com.moriwaki.java10thtopic.controller;
 
 import com.moriwaki.java10thtopic.entity.Fish;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
+import com.moriwaki.java10thtopic.request.FishRequest;
+import com.moriwaki.java10thtopic.response.FishResponse;
 import com.moriwaki.java10thtopic.service.FishService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.time.ZonedDateTime;
@@ -41,6 +44,14 @@ public class FishController {
                 "message", e.getMessage(),
                 "path", request.getRequestURI());
         return new ResponseEntity(body, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/fishes")
+    public ResponseEntity<FishResponse> insert(@RequestBody FishRequest fishRequest, UriComponentsBuilder uriBuilder) {
+        Fish fish = fishService.insert(fishRequest.getName(), fishRequest.getWeight(),fishRequest.getPrice());
+        URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
+        FishResponse body = new FishResponse("fish created");
+        return ResponseEntity.created(location).body(body);
     }
 
 }
