@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class FishService {
     private final FishMapper fishMapper;
@@ -29,10 +30,21 @@ public class FishService {
         }
     }
 
+    //POST処理 登録処理
     public Fish insert(String name, String weight, String price) {
-        Fish fish = new Fish(null, name, weight, price);
+        Fish fish = new Fish (null,name,weight,price);
         fishMapper.insert(fish);
         return fish;
+    }
+
+    //PATCH処理 更新処理
+    public void update(int id, String name, String weight, String price) {
+        Optional<Fish> fish = this.fishMapper.findById(id);
+        if (fish.isPresent()) {
+            fishMapper.update(fish);
+        } else {
+            throw new FishNotFoundException("fish not found");
+        }
     }
 
 }

@@ -2,7 +2,8 @@ package com.moriwaki.java10thtopic.controller;
 
 import com.moriwaki.java10thtopic.entity.Fish;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
-import com.moriwaki.java10thtopic.request.FishRequest;
+import com.moriwaki.java10thtopic.request.FishInsertRequest;
+import com.moriwaki.java10thtopic.request.FishUpdateRequest;
 import com.moriwaki.java10thtopic.response.FishResponse;
 import com.moriwaki.java10thtopic.service.FishService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,11 +48,17 @@ public class FishController {
     }
 
     @PostMapping("/fishes")
-    public ResponseEntity<FishResponse> insert(@RequestBody FishRequest fishRequest, UriComponentsBuilder uriBuilder) {
-        Fish fish = fishService.insert(fishRequest.getName(), fishRequest.getWeight(),fishRequest.getPrice());
+    public ResponseEntity<FishResponse> insert(@RequestBody FishInsertRequest fishInsertRequest, UriComponentsBuilder uriBuilder) {
+        Fish fish = fishService.insert(fishInsertRequest.getName(), fishInsertRequest.getWeight(), fishInsertRequest.getPrice());
         URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
         FishResponse body = new FishResponse("fish created");
         return ResponseEntity.created(location).body(body);
+    }
+
+    @PatchMapping("/fishes")
+    public ResponseEntity<String> update(@RequestBody FishUpdateRequest fishUpdateRequest) {
+        fishService.update(fishUpdateRequest.getId(), fishUpdateRequest.getName(), fishUpdateRequest.getWeight(), fishUpdateRequest.getPrice());
+        return ResponseEntity.ok("fish updated");
     }
 
 }

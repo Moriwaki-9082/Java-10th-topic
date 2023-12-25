@@ -1,9 +1,7 @@
 package com.moriwaki.java10thtopic.mapper;
+
 import com.moriwaki.java10thtopic.entity.Fish;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +21,9 @@ public interface FishMapper {
     @Insert("INSERT INTO fishes (name, weight, price) VALUES (#{name}, #{weight}, #{price})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Fish fish);
+
+    //PATCH処理　更新処理
+    @Update("UPDATE fishes SET (id, name, weight, price) VALUES (#{id}, #{name}, #{weight}, #{price})")
+    void update(Optional<Fish> fish);
 
 }

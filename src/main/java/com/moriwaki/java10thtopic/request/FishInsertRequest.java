@@ -1,12 +1,14 @@
 package com.moriwaki.java10thtopic.request;
 
-public class FishRequest {
+import com.moriwaki.java10thtopic.entity.Fish;
+
+public class FishInsertRequest {
 
     private String name;
     private String weight;
     private String price;
 
-    public FishRequest(String name, String weight, String price) {
+    public FishInsertRequest(String name, String weight, String price) {
         this.name = name;
         this.weight = weight;
         this.price = price;
