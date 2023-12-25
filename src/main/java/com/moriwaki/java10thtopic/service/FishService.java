@@ -29,6 +29,7 @@ public class FishService {
         }
     }
 
+    //POST処理　登録処理 Mapper呼び出し
     public Fish insert(String name, String weight, String price) {
         Fish fish = new Fish(null, name, weight, price);
         fishMapper.insert(fish);

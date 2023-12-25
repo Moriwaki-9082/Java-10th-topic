@@ -50,7 +50,7 @@ public class FishController {
     public ResponseEntity<FishResponse> insert(@RequestBody FishRequest fishRequest, UriComponentsBuilder uriBuilder) {
         Fish fish = fishService.insert(fishRequest.getName(), fishRequest.getWeight(),fishRequest.getPrice());
         URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
-        FishResponse body = new FishResponse("fish created");
+        FishResponse body = new FishResponse("fish　date created");
         return ResponseEntity.created(location).body(body);
     }
 
