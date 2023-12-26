@@ -1,15 +1,17 @@
 package com.moriwaki.java10thtopic.request;
 
+import java.util.List;
+
 public class FishRequest {
 
-    private String name;
-    private String weight;
-    private String price;
+    private static String name;
+    private static String weight;
+    private static String price;
 
     public FishRequest(String name, String weight, String price) {
-        this.name = name;
-        this.weight = weight;
-        this.price = price;
+        FishRequest.name = name;
+        FishRequest.weight = weight;
+        FishRequest.price = price;
     }
 
     public String getName() {
@@ -24,4 +26,7 @@ public class FishRequest {
         return price;
     }
 
+    public static List<String> convertToFish() {
+        return List.of(name,weight,price);
+    }
 }

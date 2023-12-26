@@ -24,4 +24,8 @@ public interface FishMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Fish fish);
 
+    //POST処理時に、既に存在しているNameではないか確認
+    @Select("SELECT * FROM fishes WHERE name = #{name}")
+    Optional<Fish> findByName(String Name);
+
 }

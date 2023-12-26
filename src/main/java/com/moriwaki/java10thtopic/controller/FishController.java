@@ -1,6 +1,7 @@
 package com.moriwaki.java10thtopic.controller;
 
 import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.exception.FishAlreadyExistsException;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
 import com.moriwaki.java10thtopic.request.FishRequest;
 import com.moriwaki.java10thtopic.response.FishResponse;
@@ -24,16 +25,19 @@ public class FishController {
         this.fishService = fishService;
     }
 
+    //全件表示
     @GetMapping("/fishes")
     public List<Fish> getFishes(){
         return fishService.findAll();
     }
 
+    //検索表示
     @GetMapping("/fishes/{id}")
     public Fish getFish(@PathVariable("id") int id) {
         return fishService.findById(id);
     }
 
+    //対象が存在しない場合の例外処理
     @ExceptionHandler(value = FishNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleFishNotFoundException(
             FishNotFoundException e, HttpServletRequest request) {
@@ -46,9 +50,23 @@ public class FishController {
         return new ResponseEntity(body, HttpStatus.NOT_FOUND);
     }
 
+    //登録処理時、Nameが既に存在している物の場合の例外処理
+    @ExceptionHandler(value = FishAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleFishAlreadyExistsException(
+            FishAlreadyExistsException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", ZonedDateTime.now().toString(),
+                "status", String.valueOf(HttpStatus.BAD_REQUEST.value()),
+                "error", HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity(body, HttpStatus.BAD_REQUEST);
+    }
+
+    //登録処理
     @PostMapping("/fishes")
     public ResponseEntity<FishResponse> insert(@RequestBody FishRequest fishRequest, UriComponentsBuilder uriBuilder) {
-        Fish fish = fishService.insert(fishRequest.getName(), fishRequest.getWeight(),fishRequest.getPrice());
+        Fish fish = fishService.insert(FishRequest.convertToFish());
         URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
         FishResponse body = new FishResponse("fish　date created");
         return ResponseEntity.created(location).body(body);
