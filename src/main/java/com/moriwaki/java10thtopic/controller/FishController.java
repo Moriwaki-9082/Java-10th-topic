@@ -66,7 +66,7 @@ public class FishController {
     //登録処理
     @PostMapping("/fishes")
     public ResponseEntity<FishResponse> insert(@RequestBody FishRequest fishRequest, UriComponentsBuilder uriBuilder) {
-        Fish fish = fishService.insert(FishRequest.convertToFish());
+        Fish fish = fishService.insert(fishRequest.convertToFish());
         URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
         FishResponse body = new FishResponse("fish　date created");
         return ResponseEntity.created(location).body(body);
