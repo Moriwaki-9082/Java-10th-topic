@@ -15,9 +15,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class FishServiceTest {
@@ -60,6 +58,15 @@ class FishServiceTest {
                         new Fish(2, "カニ", "500g","￥10000"),
                         new Fish(3, "マグロ", "30000g","￥93510"));
         verify(fishMapper, times(1)).findAll();
+    }
+
+    @Test
+    public void 存在しないユーザーを新規登録すること() {
+        Fish fish = new Fish(null, "カキ", "1000g", "1003");
+        doNothing().when(fishMapper).insert(fish);
+        Fish actual = fishService.insert(fish);
+        assertThat(actual).isEqualTo(new Fish(null, "カキ", "1000g", "1003"));
+        verify(fishMapper, times(1)).insert(fish);
     }
     
 }

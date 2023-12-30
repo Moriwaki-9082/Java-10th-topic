@@ -8,6 +8,6 @@ CREATE TABLE fishes (
   PRIMARY KEY(id)
 );
 
-INSERT INTO fishes (name,weight,price) VALUES ("タイ", "2200g","￥1400");
-INSERT INTO fishes (name,weight,price) VALUES ("カニ", "500g","￥10000");
-INSERT INTO fishes (name,weight,price) VALUES ("マグロ", "30000g","￥93510");
+INSERT INTO fishes (name,weight,price) VALUES ("タイ", "1000g","￥1036");
+INSERT INTO fishes (name,weight,price) VALUES ("カニ", "1000g","￥1026");
+INSERT INTO fishes (name,weight,price) VALUES ("マグロ", "1000g","￥4333");
