@@ -37,20 +37,20 @@ public class FishRestApiIntegrationTest {
                 " {" +
                 " \"id\": 1," +
                 " \"name\": \"タイ\"," +
-                " \"weight\": \"2200g\"," +
-                " \"price\": \"￥1400\"" +
+                " \"priceInYen\": \"1036\"," +
+                " \"inventoryQuantity\": \"5\"" +
                 " }," +
                 " {" +
                 " \"id\": 2," +
                 " \"name\": \"カニ\"," +
-                " \"weight\": \"500g\"," +
-                " \"price\": \"￥10000\"" +
+                " \"priceInYen\": \"1026\"," +
+                " \"inventoryQuantity\": \"7\"" +
                 " }," +
                 " {" +
                 " \"id\": 3," +
                 " \"name\": \"マグロ\"," +
-                " \"weight\": \"30000g\"," +
-                " \"price\": \"￥93510\"" +
+                " \"priceInYen\": \"4333\"," +
+                " \"inventoryQuantity\": \"10\"" +
                 " }" +
                 "]", response, JSONCompareMode.STRICT);
     }

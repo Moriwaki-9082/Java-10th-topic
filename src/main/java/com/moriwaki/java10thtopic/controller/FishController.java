@@ -1,6 +1,7 @@
 package com.moriwaki.java10thtopic.controller;
 
 import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.entity.FishView;
 import com.moriwaki.java10thtopic.exception.FishAlreadyExistsException;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
 import com.moriwaki.java10thtopic.request.FishRequest;
@@ -27,13 +28,13 @@ public class FishController {
 
     //全件表示
     @GetMapping("/fishes")
-    public List<Fish> getFishes(){
+    public List<FishView> getFishes(){
         return fishService.findAll();
     }
 
     //検索表示
     @GetMapping("/fishes/{id}")
-    public Fish getFish(@PathVariable("id") int id) {
+    public FishView getFish(@PathVariable("id") int id) {
         return fishService.findById(id);
     }
 

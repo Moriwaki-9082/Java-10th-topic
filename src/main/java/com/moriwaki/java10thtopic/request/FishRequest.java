@@ -5,13 +5,13 @@ import com.moriwaki.java10thtopic.entity.Fish;
 public class FishRequest {
 
     private String name;
-    private String weight;
-    private String price;
+    private int priceInYen;
+    private int inventoryQuantity;
 
-    public FishRequest(String name, String weight, String price) {
+    public FishRequest(String name, int priceInYen, int inventoryQuantity) {
         this.name = name;
-        this.weight = weight;
-        this.price = price;
+        this.priceInYen = priceInYen;
+        this.inventoryQuantity = inventoryQuantity;
     }
 
     public String getName() {
@@ -22,23 +22,23 @@ public class FishRequest {
         this.name = name;
     }
 
-    public String getWeight() {
-        return weight;
+    public int getPriceInYen() {
+        return priceInYen;
     }
 
-    public void setWeight(String weight) {
-        this.weight = weight;
+    public void setPriceInYen(int priceInYen) {
+        this.priceInYen = priceInYen;
     }
 
-    public String getPrice() {
-        return price;
+    public int getInventoryQuantity() {
+        return inventoryQuantity;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setInventoryQuantity(int inventoryQuantity) {
+        this.inventoryQuantity = inventoryQuantity;
     }
 
     public Fish convertToFish() {
-        return new Fish(null,this.name,this.weight,this.price);
+        return new Fish(null,this.name,this.priceInYen,this.inventoryQuantity);
     }
 }

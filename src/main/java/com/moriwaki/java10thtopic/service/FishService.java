@@ -1,6 +1,7 @@
 package com.moriwaki.java10thtopic.service;
 
 import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.entity.FishView;
 import com.moriwaki.java10thtopic.exception.FishAlreadyExistsException;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
 import com.moriwaki.java10thtopic.mapper.FishMapper;
@@ -18,13 +19,13 @@ public class FishService {
     }
 
     //Read処理　全件表示 Mapper呼び出し
-    public List<Fish> findAll(){
+    public List<FishView> findAll(){
         return this.fishMapper.findAll();
     }
 
     //Read処理　検索表示 Mapper呼び出し
-    public Fish findById(int id) {
-        Optional<Fish> fish = this.fishMapper.findById(id);
+    public FishView findById(int id) {
+        Optional<FishView> fish = this.fishMapper.findById(id);
         if (fish.isPresent()) {
             return fish.get();
         } else {

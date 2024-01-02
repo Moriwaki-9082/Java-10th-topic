@@ -1,5 +1,6 @@
 package com.moriwaki.java10thtopic.mapper;
 import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.entity.FishView;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -12,15 +13,15 @@ import java.util.Optional;
 public interface FishMapper {
 
     //Read処理　全件表示
-    @Select("SELECT * FROM fishes")
-    List<Fish> findAll();
+    @Select("SELECT * FROM fish_view")
+    List<FishView> findAll();
 
     //Read処理　検索表示
-    @Select("SELECT * FROM fishes WHERE id = #{id}")
-    Optional<Fish> findById(int id);
+    @Select("SELECT * FROM fish_view WHERE id = #{id}")
+    Optional<FishView> findById(int id);
 
     //POST処理　登録処理
-    @Insert("INSERT INTO fishes (name, weight, price) VALUES (#{name}, #{weight}, #{price})")
+    @Insert("INSERT INTO fishes (name, priceInYen, inventoryQuantity) VALUES (#{name}, #{priceInYen}, #{inventoryQuantity})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Fish fish);
 

@@ -2,13 +2,13 @@ package com.moriwaki.java10thtopic.entity;
 
 import java.util.Objects;
 
-public class Fish {
+public class FishView {
     private Integer id;
     private String name;
-    private int priceInYen;
-    private int inventoryQuantity;
+    private String priceInYen;
+    private String inventoryQuantity;
 
-    public Fish(Integer id, String name, int priceInYen, int inventoryQuantity) {
+    public FishView(Integer id, String name, String priceInYen, String inventoryQuantity) {
         this.id = id;
         this.name = name;
         this.priceInYen = priceInYen;
@@ -31,19 +31,19 @@ public class Fish {
         this.name = name;
     }
 
-    public int getPriceInYen() {
+    public String getPriceInYen() {
         return priceInYen;
     }
 
-    public void setPriceInYen(int priceInYen) {
+    public void setPriceInYen(String priceInYen) {
         this.priceInYen = priceInYen;
     }
 
-    public int getInventoryQuantity() {
+    public String getInventoryQuantity() {
         return inventoryQuantity;
     }
 
-    public void setInventoryQuantity(int price) {
+    public void setInventoryQuantity(String price) {
         this.inventoryQuantity = price;
     }
 
@@ -51,7 +51,7 @@ public class Fish {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Fish fish = (Fish) o;
+        FishView fish = (FishView) o;
         return id == fish.id && Objects.equals(name, fish.name) && Objects.equals(priceInYen, fish.priceInYen) && Objects.equals(inventoryQuantity, fish.inventoryQuantity);
     }
 

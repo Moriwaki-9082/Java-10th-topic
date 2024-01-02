@@ -3,6 +3,7 @@ package com.moriwaki.java10thtopic.mapper;
 import com.moriwaki.java10thtopic.entity.Fish;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
+import com.moriwaki.java10thtopic.entity.FishView;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,13 @@ class FishMapperTest {
     @DataSet(value = "datasets/fishes.yml")
     @Transactional
     void すべてのユーザーが取得できること() {
-        List<Fish> fishes = fishMapper.findAll();
+        List<FishView> fishes = fishMapper.findAll();
         assertThat(fishes)
                 .hasSize(3)
                 .contains(
-                        new Fish(1, "タイ", "2200g","￥1400"),
-                        new Fish(2, "カニ", "500g","￥10000"),
-                        new Fish(3, "マグロ", "30000g","￥93510")
+                        new FishView(1, "タイ", "1036円/kg", "5kg"),
+                        new FishView(2, "カニ", "1026円/kg", "7kg"),
+                        new FishView(3, "マグロ", "4333円/kg","10kg")
                 );
     }
 
@@ -40,8 +41,8 @@ class FishMapperTest {
     @DataSet(value = "datasets/fishes.yml")
     @Transactional
     public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
-        Optional<Fish> actual = fishMapper.findById(1);
-        assertThat(actual).contains(new Fish(1, "タイ", "2200g", "￥1400"));
+        Optional<FishView> actual = fishMapper.findById(1);
+        assertThat(actual).contains(new FishView(1, "タイ", "1036円/kg", "5kg"));
     }
 
 }

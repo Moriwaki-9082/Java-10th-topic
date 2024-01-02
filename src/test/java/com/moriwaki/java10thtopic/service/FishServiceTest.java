@@ -1,6 +1,7 @@
 package com.moriwaki.java10thtopic.service;
 
 import com.moriwaki.java10thtopic.entity.Fish;
+import com.moriwaki.java10thtopic.entity.FishView;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
 import com.moriwaki.java10thtopic.mapper.FishMapper;
 import org.junit.jupiter.api.Test;
@@ -28,9 +29,9 @@ class FishServiceTest {
 
     @Test
     public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
-        doReturn(Optional.of(new Fish(1, "タイ", "2200g", "￥1400"))).when(fishMapper).findById(1);
-        Fish actual = fishService.findById(1);
-        assertThat(actual).isEqualTo(new Fish(1, "タイ", "2200g", "￥1400"));
+        doReturn(Optional.of(new FishView(1, "タイ", "1036円/kg", "5kg"))).when(fishMapper).findById(1);
+        FishView actual = fishService.findById(1);
+        assertThat(actual).isEqualTo(new FishView(1, "タイ", "1036円/kg", "5kg"));
         verify(fishMapper, times(1)).findById(1);
     }
 
@@ -45,27 +46,27 @@ class FishServiceTest {
 
     @Test
     void すべてのユーザーが取得できること() {
-        List<Fish> fishList = Arrays.asList(
-                new Fish(1, "タイ", "2200g", "￥1400"),
-                new Fish(2, "カニ", "500g","￥10000"),
-                new Fish(3, "マグロ", "30000g","￥93510"));
+        List<FishView> fishList = Arrays.asList(
+                new FishView(1, "タイ", "1036円/kg", "5kg"),
+                new FishView(2, "カニ", "1026円/kg", "7kg"),
+                new FishView(3, "マグロ", "4333円/kg","10kg"));
         doReturn(fishList).when(fishMapper).findAll();
-        List<Fish> fishes = fishService.findAll();
+        List<FishView> fishes = fishService.findAll();
         assertThat(fishes)
                 .hasSize(3)
                 .contains(
-                        new Fish(1, "タイ", "2200g","￥1400"),
-                        new Fish(2, "カニ", "500g","￥10000"),
-                        new Fish(3, "マグロ", "30000g","￥93510"));
+                        new FishView(1, "タイ", "1036円/kg", "5kg"),
+                        new FishView(2, "カニ", "1026円/kg", "7kg"),
+                        new FishView(3, "マグロ", "4333円/kg","10kg"));
         verify(fishMapper, times(1)).findAll();
     }
 
     @Test
     public void 存在しないユーザーを新規登録すること() {
-        Fish fish = new Fish(null, "カキ", "1000g", "1003");
+        Fish fish = new Fish(null, "カキ", 1003, 15);
         doNothing().when(fishMapper).insert(fish);
         Fish actual = fishService.insert(fish);
-        assertThat(actual).isEqualTo(new Fish(null, "カキ", "1000g", "1003"));
+        assertThat(actual).isEqualTo(new Fish(null, "カキ", 1003, 15));
         verify(fishMapper, times(1)).insert(fish);
     }
     
