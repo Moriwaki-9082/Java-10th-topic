@@ -27,7 +27,7 @@ public class FishRestApiIntegrationTest {
     MockMvc mockMvc;
 
     @Test
-    @DataSet(value = "datasets/fishes.yml")
+    @DataSet(value = "datasets/fishView.yml")
     @Transactional
     void ユーザーが全件取得できること() throws Exception {
         String response = mockMvc.perform(MockMvcRequestBuilders.get("/fishes"))
@@ -37,20 +37,20 @@ public class FishRestApiIntegrationTest {
                 " {" +
                 " \"id\": 1," +
                 " \"name\": \"タイ\"," +
-                " \"priceInYen\": \"1036\"," +
-                " \"inventoryQuantity\": \"5\"" +
+                " \"priceInYen\": \"1036円/kg\"," +
+                " \"inventoryQuantity\": \"5kg\"" +
                 " }," +
                 " {" +
                 " \"id\": 2," +
                 " \"name\": \"カニ\"," +
-                " \"priceInYen\": \"1026\"," +
-                " \"inventoryQuantity\": \"7\"" +
+                " \"priceInYen\": \"1026円/kg\"," +
+                " \"inventoryQuantity\": \"7kg\"" +
                 " }," +
                 " {" +
                 " \"id\": 3," +
                 " \"name\": \"マグロ\"," +
-                " \"priceInYen\": \"4333\"," +
-                " \"inventoryQuantity\": \"10\"" +
+                " \"priceInYen\": \"4333円/kg\"," +
+                " \"inventoryQuantity\": \"10kg\"" +
                 " }" +
                 "]", response, JSONCompareMode.STRICT);
     }

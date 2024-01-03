@@ -1,6 +1,5 @@
 package com.moriwaki.java10thtopic.mapper;
 
-import com.moriwaki.java10thtopic.entity.Fish;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.moriwaki.java10thtopic.entity.FishView;
@@ -24,7 +23,7 @@ class FishMapperTest {
     FishMapper fishMapper;
 
     @Test
-    @DataSet(value = "datasets/fishes.yml")
+    @DataSet(value = "datasets/fishView.yml")
     @Transactional
     void すべてのユーザーが取得できること() {
         List<FishView> fishes = fishMapper.findAll();
@@ -38,7 +37,7 @@ class FishMapperTest {
     }
 
     @Test
-    @DataSet(value = "datasets/fishes.yml")
+    @DataSet(value = "datasets/fishView.yml")
     @Transactional
     public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
         Optional<FishView> actual = fishMapper.findById(1);
