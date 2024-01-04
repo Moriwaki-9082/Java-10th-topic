@@ -2,12 +2,12 @@ fishes:
   - id: 1
     name: "タイ"
     priceInYen: "1036"
-    inventoryQuantity: "5"
+    inventoryAmount: "5"
   - id: 2
     name: "カニ"
     priceInYen: "1026"
-    inventoryQuantity: "7"
+    inventoryAmount: "7"
   - id: 3
     name: "マグロ"
     priceInYen: "4333"
-    inventoryQuantity: "10"
+    inventoryAmount: "10"

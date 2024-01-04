@@ -21,7 +21,7 @@ public interface FishMapper {
     Optional<FishView> findById(int id);
 
     //POST処理　登録処理
-    @Insert("INSERT INTO fishes (name, priceInYen, inventoryQuantity) VALUES (#{name}, #{priceInYen}, #{inventoryQuantity})")
+    @Insert("INSERT INTO fishes (name, priceInYen, inventoryAmount) VALUES (#{name}, #{priceInYen}, #{inventoryAmount})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Fish fish);
 

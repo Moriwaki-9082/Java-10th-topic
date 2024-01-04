@@ -6,13 +6,13 @@ public class Fish {
     private Integer id;
     private String name;
     private int priceInYen;
-    private int inventoryQuantity;
+    private int inventoryAmount;
 
-    public Fish(Integer id, String name, int priceInYen, int inventoryQuantity) {
+    public Fish(Integer id, String name, int priceInYen, int inventoryAmount) {
         this.id = id;
         this.name = name;
         this.priceInYen = priceInYen;
-        this.inventoryQuantity = inventoryQuantity;
+        this.inventoryAmount = inventoryAmount;
     }
 
     public Integer getId() {
@@ -39,12 +39,12 @@ public class Fish {
         this.priceInYen = priceInYen;
     }
 
-    public int getInventoryQuantity() {
-        return inventoryQuantity;
+    public int getInventoryAmount() {
+        return inventoryAmount;
     }
 
-    public void setInventoryQuantity(int price) {
-        this.inventoryQuantity = price;
+    public void setInventoryAmount(int price) {
+        this.inventoryAmount = price;
     }
 
     @Override
@@ -52,12 +52,12 @@ public class Fish {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fish fish = (Fish) o;
-        return id == fish.id && Objects.equals(name, fish.name) && Objects.equals(priceInYen, fish.priceInYen) && Objects.equals(inventoryQuantity, fish.inventoryQuantity);
+        return id == fish.id && Objects.equals(name, fish.name) && Objects.equals(priceInYen, fish.priceInYen) && Objects.equals(inventoryAmount, fish.inventoryAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, priceInYen, inventoryQuantity);
+        return Objects.hash(id, name, priceInYen, inventoryAmount);
     }
 
 }

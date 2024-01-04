@@ -38,19 +38,19 @@ public class FishRestApiIntegrationTest {
                 " \"id\": 1," +
                 " \"name\": \"タイ\"," +
                 " \"priceInYen\": \"1036円/kg\"," +
-                " \"inventoryQuantity\": \"5kg\"" +
+                " \"inventoryAmount\": \"5kg\"" +
                 " }," +
                 " {" +
                 " \"id\": 2," +
                 " \"name\": \"カニ\"," +
                 " \"priceInYen\": \"1026円/kg\"," +
-                " \"inventoryQuantity\": \"7kg\"" +
+                " \"inventoryAmount\": \"7kg\"" +
                 " }," +
                 " {" +
                 " \"id\": 3," +
                 " \"name\": \"マグロ\"," +
                 " \"priceInYen\": \"4333円/kg\"," +
-                " \"inventoryQuantity\": \"10kg\"" +
+                " \"inventoryAmount\": \"10kg\"" +
                 " }" +
                 "]", response, JSONCompareMode.STRICT);
     }

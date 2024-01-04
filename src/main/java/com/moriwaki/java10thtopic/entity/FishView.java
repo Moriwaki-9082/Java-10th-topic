@@ -6,13 +6,13 @@ public class FishView {
     private Integer id;
     private String name;
     private String priceInYen;
-    private String inventoryQuantity;
+    private String inventoryAmount;
 
-    public FishView(Integer id, String name, String priceInYen, String inventoryQuantity) {
+    public FishView(Integer id, String name, String priceInYen, String inventoryAmount) {
         this.id = id;
         this.name = name;
         this.priceInYen = priceInYen;
-        this.inventoryQuantity = inventoryQuantity;
+        this.inventoryAmount = inventoryAmount;
     }
 
     public Integer getId() {
@@ -39,12 +39,12 @@ public class FishView {
         this.priceInYen = priceInYen;
     }
 
-    public String getInventoryQuantity() {
-        return inventoryQuantity;
+    public String getInventoryAmount() {
+        return inventoryAmount;
     }
 
-    public void setInventoryQuantity(String price) {
-        this.inventoryQuantity = price;
+    public void setInventoryAmount(String price) {
+        this.inventoryAmount = price;
     }
 
     @Override
@@ -52,12 +52,12 @@ public class FishView {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FishView fish = (FishView) o;
-        return id == fish.id && Objects.equals(name, fish.name) && Objects.equals(priceInYen, fish.priceInYen) && Objects.equals(inventoryQuantity, fish.inventoryQuantity);
+        return id == fish.id && Objects.equals(name, fish.name) && Objects.equals(priceInYen, fish.priceInYen) && Objects.equals(inventoryAmount, fish.inventoryAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, priceInYen, inventoryQuantity);
+        return Objects.hash(id, name, priceInYen, inventoryAmount);
     }
 
 }

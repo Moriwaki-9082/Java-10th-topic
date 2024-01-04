@@ -6,12 +6,12 @@ public class FishRequest {
 
     private String name;
     private int priceInYen;
-    private int inventoryQuantity;
+    private int inventoryAmount;
 
-    public FishRequest(String name, int priceInYen, int inventoryQuantity) {
+    public FishRequest(String name, int priceInYen, int inventoryAmount) {
         this.name = name;
         this.priceInYen = priceInYen;
-        this.inventoryQuantity = inventoryQuantity;
+        this.inventoryAmount = inventoryAmount;
     }
 
     public String getName() {
@@ -30,15 +30,15 @@ public class FishRequest {
         this.priceInYen = priceInYen;
     }
 
-    public int getInventoryQuantity() {
-        return inventoryQuantity;
+    public int getInventoryAmount() {
+        return inventoryAmount;
     }
 
-    public void setInventoryQuantity(int inventoryQuantity) {
-        this.inventoryQuantity = inventoryQuantity;
+    public void setInventoryAmount(int inventoryAmount) {
+        this.inventoryAmount = inventoryAmount;
     }
 
     public Fish convertToFish() {
-        return new Fish(null,this.name,this.priceInYen,this.inventoryQuantity);
+        return new Fish(null,this.name,this.priceInYen,this.inventoryAmount);
     }
 }
