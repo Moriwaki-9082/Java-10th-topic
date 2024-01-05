@@ -35,12 +35,23 @@ public class FishService {
 
     //POST処理　登録処理 Mapper呼び出し
     public Fish insert(Fish fish) {
-        Optional<Fish> fishOptional = this.fishMapper.findByName(fish.getName());
-        if(fishOptional.isPresent()){
+        Optional<Fish> insertCheck = this.fishMapper.checkByName(fish.getName());
+        if(insertCheck.isPresent()){
             throw new FishAlreadyExistsException("name :" + fish.getName() + " already exists");
+        }else {
+            fishMapper.insert(fish);
         }
-        fishMapper.insert(fish);
         return fish;
+    }
+
+    //PATCH処理 更新処理
+    public void update(Fish fish) {
+        Optional<Fish> updateCheck = this.fishMapper.checkById(fish.getId());
+        if (updateCheck.isPresent()) {
+            fishMapper.update(fish);
+        } else {
+            throw new FishNotFoundException("id does not exist.");
+        }
     }
 
 }
