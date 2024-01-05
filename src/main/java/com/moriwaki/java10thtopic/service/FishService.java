@@ -44,7 +44,7 @@ public class FishService {
         return fish;
     }
 
-    //PATCH処理 更新処理
+    //PATCH処理 更新処理 Mapper呼び出し
     public void update(Fish fish) {
         Optional<Fish> updateCheck = this.fishMapper.checkById(fish.getId());
         if (updateCheck.isPresent()) {
