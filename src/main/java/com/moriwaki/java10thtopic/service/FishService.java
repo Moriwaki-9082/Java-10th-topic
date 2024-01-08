@@ -36,8 +36,8 @@ public class FishService {
 
     //POST処理　登録処理 Mapper呼び出し
     public Fish insert(Fish fish) {
-        Optional<Fish> insertCheck = this.fishMapper.checkByName(fish.getName());
-        if(insertCheck.isPresent()){
+        Optional<Fish> foundFish = this.fishMapper.checkByName(fish.getName());
+        if(foundFish.isPresent()){
             throw new FishAlreadyExistsException("name :" + fish.getName() + " already exists");
         } else {
             fishMapper.insert(fish);
@@ -47,9 +47,9 @@ public class FishService {
 
     //PATCH処理 更新処理 Mapper呼び出し
     public void update(Fish fish) {
-        Optional<Fish> updateCheck = this.fishMapper.checkById(fish.getId());
+        Optional<Fish> existingFish = this.fishMapper.checkById(fish.getId());
         try {
-            System.out.println(updateCheck.orElseThrow(() -> new RuntimeException ()));
+            System.out.println(existingFish.orElseThrow(() -> new RuntimeException ()));
             fishMapper.update(fish);
             } catch (RuntimeException  e) {
             throw new FishNotFoundException("id does not exist.");
