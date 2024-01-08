@@ -78,7 +78,7 @@ public class FishController {
     @PatchMapping("/fishes")
     public ResponseEntity<String> update(@RequestBody FishUpdateRequest fishUpdateRequest) {
         fishService.update(fishUpdateRequest.updateToFish());
-        return ResponseEntity.ok("fish date updated");
+        return ResponseEntity.ok("fish data updated");
     }
 
 }

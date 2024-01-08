@@ -26,9 +26,10 @@ public class FishService {
     //Read処理　検索表示 Mapper呼び出し
     public FishView findById(int id) {
         Optional<FishView> fish = this.fishMapper.findById(id);
-        if (fish.isPresent()) {
+        try {
+            System.out.println(fish.orElseThrow(() -> new RuntimeException ()));
             return fish.get();
-        } else {
+        } catch (RuntimeException  e) {
             throw new FishNotFoundException("fish not found");
         }
     }
@@ -38,7 +39,7 @@ public class FishService {
         Optional<Fish> insertCheck = this.fishMapper.checkByName(fish.getName());
         if(insertCheck.isPresent()){
             throw new FishAlreadyExistsException("name :" + fish.getName() + " already exists");
-        }else {
+        } else {
             fishMapper.insert(fish);
         }
         return fish;
@@ -47,9 +48,10 @@ public class FishService {
     //PATCH処理 更新処理 Mapper呼び出し
     public void update(Fish fish) {
         Optional<Fish> updateCheck = this.fishMapper.checkById(fish.getId());
-        if (updateCheck.isPresent()) {
+        try {
+            System.out.println(updateCheck.orElseThrow(() -> new RuntimeException ()));
             fishMapper.update(fish);
-        } else {
+            } catch (RuntimeException  e) {
             throw new FishNotFoundException("id does not exist.");
         }
     }

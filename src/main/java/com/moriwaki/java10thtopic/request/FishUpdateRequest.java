@@ -20,32 +20,16 @@ public class FishUpdateRequest {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getPriceInYen() {
         return priceInYen;
     }
 
-    public void setPriceInYen(int priceInYen) {
-        this.priceInYen = priceInYen;
-    }
-
     public int getInventoryAmount() {
         return inventoryAmount;
-    }
-
-    public void setInventoryAmount(int inventoryAmount) {
-        this.inventoryAmount = inventoryAmount;
     }
 
     public Fish updateToFish() {
