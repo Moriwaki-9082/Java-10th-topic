@@ -26,21 +26,23 @@ public class FishService {
     //Read処理　検索表示 Mapper呼び出し
     public FishView findById(int id) {
         Optional<FishView> fish = this.fishMapper.findById(id);
-        if (fish.isPresent()) {
-            return fish.get();
-        } else {
-            throw new FishNotFoundException("fish not found");
-        }
+        fish.orElseThrow(() -> new FishNotFoundException("fish not found"));
+        return fish.get();
     }
 
     //POST処理　登録処理 Mapper呼び出し
     public Fish insert(Fish fish) {
-        Optional<Fish> fishOptional = this.fishMapper.findByName(fish.getName());
-        if(fishOptional.isPresent()){
+        this.fishMapper.checkByName(fish.getName()).ifPresent(foundFish -> {
             throw new FishAlreadyExistsException("name :" + fish.getName() + " already exists");
-        }
+        });
         fishMapper.insert(fish);
         return fish;
+    }
+
+    //PATCH処理 更新処理 Mapper呼び出し
+    public void update(Fish fish) {
+        this.fishMapper.checkById(fish.getId()).orElseThrow(() -> new FishNotFoundException("id does not exist"));
+        fishMapper.update(fish);
     }
 
 }

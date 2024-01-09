@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS fishes;
 
 CREATE TABLE fishes (
   id int unsigned AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL,
+  name VARCHAR(255) UNIQUE,
   priceInYen VARCHAR(255) NOT NULL,
   inventoryAmount VARCHAR(255) NOT NULL,
   PRIMARY KEY(id)

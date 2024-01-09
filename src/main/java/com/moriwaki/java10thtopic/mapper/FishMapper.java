@@ -1,10 +1,7 @@
 package com.moriwaki.java10thtopic.mapper;
 import com.moriwaki.java10thtopic.entity.Fish;
 import com.moriwaki.java10thtopic.entity.FishView;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +22,16 @@ public interface FishMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Fish fish);
 
-    //POST処理時に、既に存在しているNameではないか確認
+    //POST処理時に、既に存在しているNameか確認
     @Select("SELECT * FROM fishes WHERE name = #{name}")
-    Optional<Fish> findByName(String Name);
+    Optional<Fish> checkByName(String name);
+
+    //PATCH処理　更新処理
+    @Update("UPDATE fishes SET name = #{name}, priceInYen = #{priceInYen}, inventoryAmount = #{inventoryAmount} WHERE id = #{id}")
+    void update(Fish fish);
+
+    //PATCH処理時に、既に存在しているIDか確認
+    @Select("SELECT * FROM fishes WHERE id = #{id}")
+    Optional<Fish> checkById(int id);
 
 }

@@ -5,6 +5,7 @@ import com.moriwaki.java10thtopic.entity.FishView;
 import com.moriwaki.java10thtopic.exception.FishAlreadyExistsException;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
 import com.moriwaki.java10thtopic.request.FishRequest;
+import com.moriwaki.java10thtopic.request.FishUpdateRequest;
 import com.moriwaki.java10thtopic.response.FishResponse;
 import com.moriwaki.java10thtopic.service.FishService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,6 +72,13 @@ public class FishController {
         URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
         FishResponse body = new FishResponse("fish　date created");
         return ResponseEntity.created(location).body(body);
+    }
+
+    //更新処理
+    @PatchMapping("/fishes")
+    public ResponseEntity<String> update(@RequestBody FishUpdateRequest fishUpdateRequest) {
+        fishService.update(fishUpdateRequest.updateToFish());
+        return ResponseEntity.ok("fish date updated");
     }
 
 }
