@@ -40,9 +40,10 @@ public class FishService {
     }
 
     //PATCH処理 更新処理 Mapper呼び出し
-    public void update(Fish fish) {
+    public Fish update(Fish fish) {
         this.fishMapper.checkById(fish.getId()).orElseThrow(() -> new FishNotFoundException("id does not exist"));
         fishMapper.update(fish);
+        return fish;
     }
 
 }

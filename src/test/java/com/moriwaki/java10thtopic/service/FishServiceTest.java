@@ -28,7 +28,7 @@ class FishServiceTest {
     FishMapper fishMapper;
 
     @Test
-    public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
+    public void 存在するデータのIDを指定したときに正常にデータが返されること() {
         doReturn(Optional.of(new FishView(1, "タイ", "1036円/kg", "5kg"))).when(fishMapper).findById(1);
         FishView actual = fishService.findById(1);
         assertThat(actual).isEqualTo(new FishView(1, "タイ", "1036円/kg", "5kg"));
@@ -36,7 +36,7 @@ class FishServiceTest {
     }
 
     @Test
-    public void 存在しないユーザーのIDを指定したときに例外処理が返されること() throws FishNotFoundException {
+    public void 存在しないデータのIDを指定したときに例外処理が返されること() throws FishNotFoundException {
         doReturn(Optional.empty()).when(fishMapper).findById(100);
         assertThrows(FishNotFoundException.class, () -> {
                     fishService.findById(100);
@@ -45,7 +45,7 @@ class FishServiceTest {
     }
 
     @Test
-    void すべてのユーザーが取得できること() {
+    void すべてのデータが取得できること() {
         List<FishView> fishList = Arrays.asList(
                 new FishView(1, "タイ", "1036円/kg", "5kg"),
                 new FishView(2, "カニ", "1026円/kg", "7kg"),
@@ -62,12 +62,22 @@ class FishServiceTest {
     }
 
     @Test
-    public void 存在しないユーザーを新規登録すること() {
+    public void 存在しないデータを新規登録すること() {
         Fish fish = new Fish(null, "カキ", 1003, 15);
         doNothing().when(fishMapper).insert(fish);
         Fish actual = fishService.insert(fish);
         assertThat(actual).isEqualTo(new Fish(null, "カキ", 1003, 15));
         verify(fishMapper, times(1)).insert(fish);
     }
-    
+
+    @Test
+    public void 存在しているデータを更新すること() {
+        Fish fish = new Fish(1, "ウナギ", 5322, 13);
+        doNothing().when(fishMapper).update(fish);
+        doReturn(Optional.of(fish)).when(fishMapper).checkById(1);
+        Fish actual = fishService.update(fish);
+        assertThat(actual).isEqualTo(new Fish(1, "ウナギ", 5322, 13));
+        verify(fishMapper, times(1)).update(fish);
+    }
+
 }

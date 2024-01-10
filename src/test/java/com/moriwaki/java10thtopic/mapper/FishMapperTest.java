@@ -25,7 +25,7 @@ class FishMapperTest {
     @Test
     @DataSet(value = "datasets/fishView.yml")
     @Transactional
-    void すべてのユーザーが取得できること() {
+    void すべてのデータが取得できること() {
         List<FishView> fishes = fishMapper.findAll();
         assertThat(fishes)
                 .hasSize(3)
@@ -39,7 +39,7 @@ class FishMapperTest {
     @Test
     @DataSet(value = "datasets/fishView.yml")
     @Transactional
-    public void 存在するユーザーのIDを指定したときに正常にユーザーが返されること() {
+    public void 存在するデータのIDを指定したときに正常にデータが返されること() {
         Optional<FishView> actual = fishMapper.findById(1);
         assertThat(actual).contains(new FishView(1, "タイ", "1036円/kg", "5kg"));
     }
