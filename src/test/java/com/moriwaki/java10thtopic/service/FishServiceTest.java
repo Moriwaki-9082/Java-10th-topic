@@ -2,6 +2,7 @@ package com.moriwaki.java10thtopic.service;
 
 import com.moriwaki.java10thtopic.entity.Fish;
 import com.moriwaki.java10thtopic.entity.FishView;
+import com.moriwaki.java10thtopic.exception.FishAlreadyExistsException;
 import com.moriwaki.java10thtopic.exception.FishNotFoundException;
 import com.moriwaki.java10thtopic.mapper.FishMapper;
 import org.junit.jupiter.api.Test;
@@ -71,6 +72,16 @@ class FishServiceTest {
     }
 
     @Test
+    public void 新規登録しようとしたデータ名が既に存在した場合に例外処理が返されること() throws FishAlreadyExistsException {
+        Fish fish = new Fish(1, "カキ", 1003, 15);
+        doReturn(Optional.of(fish)).when(fishMapper).checkByName("カキ");
+        assertThrows(FishAlreadyExistsException.class, () -> {
+            fishService.insert(fish);
+        });
+        verify(fishMapper, times(1)).checkByName("カキ");
+    }
+
+    @Test
     public void 存在しているデータを更新すること() {
         Fish fish = new Fish(1, "ウナギ", 5322, 13);
         doNothing().when(fishMapper).update(fish);
@@ -78,6 +89,16 @@ class FishServiceTest {
         Fish actual = fishService.update(fish);
         assertThat(actual).isEqualTo(new Fish(1, "ウナギ", 5322, 13));
         verify(fishMapper, times(1)).update(fish);
+    }
+
+    @Test
+    public void 存在しないデータを更新しようしたときに例外処理が返されること() throws FishNotFoundException {
+        Fish fish = new Fish(999, "ウナギ", 5322, 13);
+        doReturn(Optional.empty()).when(fishMapper).checkById(999);
+        assertThrows(FishNotFoundException.class, () -> {
+            fishService.update(fish);
+        });
+        verify(fishMapper, times(1)).checkById(999);
     }
 
 }
