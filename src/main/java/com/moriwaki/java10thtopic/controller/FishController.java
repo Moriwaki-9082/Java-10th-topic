@@ -9,6 +9,7 @@ import com.moriwaki.java10thtopic.request.FishUpdateRequest;
 import com.moriwaki.java10thtopic.response.FishResponse;
 import com.moriwaki.java10thtopic.service.FishService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -79,6 +80,13 @@ public class FishController {
     public ResponseEntity<String> update(@RequestBody FishUpdateRequest fishUpdateRequest) {
         fishService.update(fishUpdateRequest.updateToFish());
         return ResponseEntity.ok("fish date updated");
+    }
+
+    //削除処理
+    @DeleteMapping("/fishes/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") int id){
+        fishService.delete(id);
+        return ResponseEntity.ok("fish date deleted");
     }
 
 }
