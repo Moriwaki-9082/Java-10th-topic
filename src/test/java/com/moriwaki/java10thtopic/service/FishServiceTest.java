@@ -92,7 +92,7 @@ class FishServiceTest {
     }
 
     @Test
-    public void 存在しないデータを更新か削除しようした際の例外処理テスト() throws FishNotFoundException {
+    public void 存在しないデータを更新しようした際の例外処理テスト() throws FishNotFoundException {
         Fish fish = new Fish(999, "ウナギ", 5322, 13);
         doReturn(Optional.empty()).when(fishMapper).checkById(999);
         assertThrows(FishNotFoundException.class, () -> {
@@ -104,10 +104,20 @@ class FishServiceTest {
     @Test
     public void データの削除処理テスト() {
         Fish fish = new Fish(1, "ウナギ", 5322, 13);
-        doNothing().when(fishMapper).delete(1);
         doReturn(Optional.of(fish)).when(fishMapper).checkById(1);
+        doNothing().when(fishMapper).delete(1);
         int actual = fishService.delete(1);
         assertThat(actual).isEqualTo(1);
         verify(fishMapper, times(1)).delete(1);
     }
+
+    @Test
+    public void 存在しないデータを削除しようした際の例外処理テスト() throws FishNotFoundException {
+        doReturn(Optional.empty()).when(fishMapper).checkById(999);
+        assertThrows(FishNotFoundException.class, () -> {
+            fishService.delete(999);
+        });
+        verify(fishMapper, times(1)).checkById(999);
+    }
+
 }
