@@ -70,7 +70,7 @@ public class FishController {
     public ResponseEntity<FishResponse> insert(@RequestBody FishRequest fishRequest, UriComponentsBuilder uriBuilder) {
         Fish fish = fishService.insert(fishRequest.convertToFish());
         URI location = uriBuilder.path("/fishes/{id}").buildAndExpand(fish.getId()).toUri();
-        FishResponse body = new FishResponse("fish　date created");
+        FishResponse body = new FishResponse("fish　data created");
         return ResponseEntity.created(location).body(body);
     }
 
@@ -78,7 +78,14 @@ public class FishController {
     @PatchMapping("/fishes")
     public ResponseEntity<String> update(@RequestBody FishUpdateRequest fishUpdateRequest) {
         fishService.update(fishUpdateRequest.updateToFish());
-        return ResponseEntity.ok("fish date updated");
+        return ResponseEntity.ok("fish data updated");
+    }
+
+    //削除処理
+    @DeleteMapping("/fishes/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") int id){
+        fishService.delete(id);
+        return ResponseEntity.ok("fish data deleted");
     }
 
 }

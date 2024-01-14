@@ -46,4 +46,11 @@ public class FishService {
         return fish;
     }
 
+    //DELETE処理　削除処理 Mapper呼び出し
+    public int delete(int id) {
+        this.fishMapper.checkById(id).orElseThrow(() -> new FishNotFoundException("id does not exist"));
+        fishMapper.delete(id);
+        return id;
+    }
+
 }

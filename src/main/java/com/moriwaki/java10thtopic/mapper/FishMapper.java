@@ -9,11 +9,11 @@ import java.util.Optional;
 @Mapper
 public interface FishMapper {
 
-    //Read処理　全件表示
+    //Read処理　全件表示　表示用DB(fish_view)呼び出し
     @Select("SELECT * FROM fish_view")
     List<FishView> findAll();
 
-    //Read処理　検索表示
+    //Read処理　検索表示　表示用DB(fish_view)呼び出し
     @Select("SELECT * FROM fish_view WHERE id = #{id}")
     Optional<FishView> findById(int id);
 
@@ -30,8 +30,12 @@ public interface FishMapper {
     @Update("UPDATE fishes SET name = #{name}, priceInYen = #{priceInYen}, inventoryAmount = #{inventoryAmount} WHERE id = #{id}")
     void update(Fish fish);
 
-    //PATCH処理時に、既に存在しているIDか確認
+    //PATCH処理、DELETE処理時に、既に存在しているIDか確認
     @Select("SELECT * FROM fishes WHERE id = #{id}")
     Optional<Fish> checkById(int id);
+
+    //DELETE処理　削除処理
+    @Delete("DELETE FROM fishes WHERE id = #{id}")
+    void delete(int id);
 
 }
